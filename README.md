@@ -3,7 +3,7 @@
 - Tooltip
   
 <p align="left">
-  <img src="https://github.com/francinedds/sidebar-delphi/blob/main/screenshots/sidebar-1.png" width="200" />
-  <img src="https://github.com/francinedds/sidebar-delphi/blob/main/screenshots/sidebar-2.png" width="200" />
+  <img src="https://github.com/francinedds/sidebar-delphi/blob/main/screenshots/sidebar-1.png" width="500" />
+  <img src="https://github.com/francinedds/sidebar-delphi/blob/main/screenshots/sidebar-2.png" width="500" />
 </p>
  
