@@ -1,4 +1,4 @@
 # Sidebar em Delphi
-- Com  "slide-in" ou "slide-over"
+- Com  "slide-in" e "slide-over"
 - Tooltip
 
