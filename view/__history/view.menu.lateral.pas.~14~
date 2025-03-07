@@ -1,0 +1,123 @@
+unit view.menu.lateral;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Buttons,
+  System.ImageList, Vcl.ImgList, Vcl.Imaging.pngimage, Vcl.StdCtrls,
+  Vcl.ComCtrls;
+
+type
+  TViewMenuLateral = class(TForm)
+    pnlBackground: TPanel;
+    pnlClose: TPanel;
+    pnlHeader: TPanel;
+    pnlLeft: TPanel;
+    pnlBtnClose: TPanel;
+    btnClose: TSpeedButton;
+    pnlButtonMenu: TPanel;
+    btnMenu: TSpeedButton;
+    pnlMenu: TPanel;
+    TimerMenu: TTimer;
+    pnlBtnSuporte: TPanel;
+    btnSuporte: TSpeedButton;
+    pnlUser: TPanel;
+    btnUser: TSpeedButton;
+    pnlEmail: TPanel;
+    btnEmail: TSpeedButton;
+    pnlInstagram: TPanel;
+    btnInstagram: TSpeedButton;
+    pnlEstatistica: TPanel;
+    btnLogin: TSpeedButton;
+    lblTitulo: TLabel;
+    Icones: TImageList;
+    pnlBtnMinimizar: TPanel;
+    btnMinimizar: TSpeedButton;
+    pnlBtnMaximizar: TPanel;
+    btnMaximizar: TSpeedButton;
+    pnlFooter: TPanel;
+    pnlCopyright: TPanel;
+    lblCopyright: TLabel;
+    pnlContent: TPanel;
+    procedure btnCloseClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure btnMenuClick(Sender: TObject);
+    procedure TimerMenuTimer(Sender: TObject);
+    procedure btnMinimizarClick(Sender: TObject);
+    procedure btnMaximizarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ViewMenuLateral: TViewMenuLateral;
+
+implementation
+
+{$R *.dfm}
+
+procedure TViewMenuLateral.btnCloseClick(Sender: TObject);
+begin
+  Application.Terminate;
+end;
+
+procedure TViewMenuLateral.btnMaximizarClick(Sender: TObject);
+begin
+  if WindowState = wsMaximized then
+     WindowState := wsNormal
+  else
+    WindowState := wsMaximized;
+end;
+
+procedure TViewMenuLateral.btnMenuClick(Sender: TObject);
+begin // no clique do botão
+    // verifica se o menu está visível ou oculto e faz a animação
+  if pnlMenu.Width = 0 then
+  begin
+    TimerMenu.Tag := 1;  // indicador de que o menu deve abrir
+    TimerMenu.Enabled := True;
+  end
+  else
+  begin
+    TimerMenu.Tag := -1;  // indicador de que o menu deve fechar
+    TimerMenu.Enabled := True;
+  end;
+end;
+
+procedure TViewMenuLateral.btnMinimizarClick(Sender: TObject);
+begin
+  Application.Minimize;
+end;
+
+procedure TViewMenuLateral.FormCreate(Sender: TObject);
+begin
+   // inicializa o menu lateral com a largura 0 (oculto)
+  pnlMenu.Width := 0;
+  TimerMenu.Enabled := False;  // o timer inicialmente está desativado
+end;
+
+procedure TViewMenuLateral.TimerMenuTimer(Sender: TObject);
+begin
+  // controla a animação de abertura ou fechamento do menu
+  if TimerMenu.Tag = 1 then
+  begin
+    // aumenta a largura do menu para mostrar
+    if pnlMenu.Width < 200 then
+      pnlMenu.Width := pnlMenu.Width + 200
+    else
+      TimerMenu.Enabled := False;  // parar animação quando atingir o tamanho máximo
+  end
+  else if TimerMenu.Tag = -1 then
+  begin
+    // diminui a largura do menu para esconder
+    if pnlMenu.Width > 0 then
+      pnlMenu.Width := pnlMenu.Width - 200
+    else
+      TimerMenu.Enabled := False;  // parar animação quando atingir o tamanho mínimo
+  end;
+end;
+
+end.
